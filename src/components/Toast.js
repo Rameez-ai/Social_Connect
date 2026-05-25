@@ -17,6 +17,7 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
   withTiming,
+  runOnJS,
 } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useTheme } from '../utils/theme';
@@ -67,7 +68,7 @@ const Toast = ({
     // Slide down before notifying parent
     translateY.value = withSpring(100, { damping: 15, stiffness: 120 }, () => {
       if (onDismiss) {
-        onDismiss();
+        runOnJS(onDismiss)();
       }
     });
     opacity.value = withTiming(0, { duration: 200 });
